@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+<h1>  This the About Page :</h1>
+
+{% block content %}
+{% for post in posts %}
+    <h1> {{ post.name }} </h1>
+    <p> {{ post.phone_number }} </p>
+{% endfor %}
+{% endblock content %}
+
