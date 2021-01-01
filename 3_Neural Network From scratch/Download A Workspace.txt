@@ -1,5 +1,0 @@
-
-
-# Create a zipped archive of your workspace directory: tar -czf ~/workspace.tar.gz ~/work
-
-# Move the archive into the workspace directory so you can see it: mv ~/workspace.tar.gz ~/work/workspace.tar.gz
