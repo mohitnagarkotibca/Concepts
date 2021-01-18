@@ -73,19 +73,29 @@ app.layout = html.Div(
                                       value ='Initial_value',
                                       type='text')]),
         html.Br(),
+                html.Div(['Input: ', dcc.Input(id='input2',
+                                      value ='enter a number',
+                                      type='text')]),
+
+        html.Br(),
         html.Div(id='output1'),
+        html.Br(),
         html.Div(id='output2')
-        ]    
+        ]
     )
 @app.callback(
-    [Output(component_id='output1',component_property='children'),
-    Output(component_id='output2',component_property='children')],
-    
+    Output(component_id='output1',component_property='children'),
     [Input(component_id='input', component_property='value')]
     )
 def update_output_div(input_value):
-    return 'Output: {}'.format(input_value),'Output: {}'.format(input_value)
+    return 'Output: {}'.format(input_value)
 
+@app.callback(
+    Output(component_id='output2',component_property='children'),
+    [Input(component_id='input2',component_property='value')]
+    )
+def update_output_2(val):
+    return int(val)**2
 
 
 if __name__== '__main__':

@@ -17,22 +17,22 @@ app = dash.Dash(__name__)
 data= pd.read_csv('matches.csv')
 data_g= data.groupby('Season').get_group('IPL-2008')['winner'].value_counts()
 #layout---------------------------------------
-fig= go.Figure(
-    go.Scatter(
-        x= data_g.index,
-        y= data_g.values,
-        mode='markers',
-        text= data_g.index,
-        textposition='top right'
-        )
-    )
+# fig= go.Figure(
+#     go.Scatter(
+#         x= data_g.index,
+#         y= data_g.values,
+#         mode='markers',
+#         text= data_g.index,
+#         textposition='top right'
+#         )
+#     )
 
-for i in range(len(data_g .values)):    
-    fig.add_annotation(
-        x= data_g.index[i],
-        y= data_g.values[i] +20,
-        text= str(data_g.values[i])
-        )
+# for i in range(len(data_g .values)):    
+#     fig.add_annotation(
+#         x= data_g.index[i],
+#         y= data_g.values[i] +20,
+#         text= str(data_g.values[i])
+#         )
 
 app.layout = html.Div(
               children=[
@@ -58,9 +58,9 @@ app.layout = html.Div(
                       ),
                   
                   html.Div(
-                  dcc.Loading(dcc.Graph(id='output', figure= fig)  )                   
+                  dcc.Loading(dcc.Graph(id='output', figure= [])  )                   
                   ,
-                  style={'width': '50%'})
+                  style={'width': '90%'})
                   
                   ]
     )

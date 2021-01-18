@@ -41,6 +41,8 @@ fig= go.Figure(
 #Layout-------------------------------
 app.layout= html.Div(
     children=[
+        html.Br(),
+        html.Br(),
         html.Div(
             dcc.Slider(
                 id='input_slider',
@@ -54,10 +56,12 @@ app.layout= html.Div(
             ),
         html.Div(id='output_year')
             ,
+        html.Div(
         dcc.Graph(
             id='output_graph',
             figure=fig
             )
+        )
         ]
     )
 
