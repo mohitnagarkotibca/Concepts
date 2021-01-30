@@ -1,0 +1,52 @@
+# Table creation
+CREATE TABLE Manufacturers (
+  Code INTEGER,
+  Name VARCHAR(255) NOT NULL,
+  PRIMARY KEY (Code)
+);
+SELECT * FROM Manufacturers;
+
+CREATE TABLE Products (
+  Code INTEGER,
+  Name VARCHAR(255) NOT NULL,
+  Price DECIMAL NOT NULL,
+  Manufacturer INTEGER NOT NULL,
+  PRIMARY KEY (Code),
+  FOREIGN KEY (Manufacturer) REFERENCES Manufacturers(Code)
+) ENGINE=INNODB; 
+
+SELECT * FROM products;
+
+INSERT INTO Manufacturers(Code, Name) VALUES(1,'Sony');
+INSERT INTO Manufacturers(Code, Name) VALUES(2,'Creative Labs');
+INSERT INTO Manufacturers(Code, Name) VALUES(3,'Hewlett-Packard');
+INSERT INTO Manufacturers(Code, Name) VALUES(4,'Iomega');
+INSERT INTO Manufacturers(Code, Name) VALUES(5,'Fujitsu');
+INSERT INTO Manufacturers(Code, Name) VALUES(6,'Winchester');
+
+INSERT INTO Products(Code, Name, Price, Manufacturer) VALUES(1, 'Hard drive', 240, 5);
+INSERT INTO Products(Code, Name, Price, Manufacturer) VALUES(2, 'Memory', 120, 6);
+INSERT INTO Products(Code, Name, Price, Manufacturer) VALUES(3, 'ZIP drive', 150, 4);
+INSERT INTO Products(Code, Name, Price, Manufacturer) VALUES(4, 'Floppy disk', 5, 6);
+INSERT INTO Products(Code, Name, Price, Manufacturer) VALUES(5, 'Monitor', 240, 1);
+INSERT INTO Products(Code, Name, Price, Manufacturer) VALUES(6, 'DVD drive', 180, 2);
+INSERT INTO Products(Code, Name, Price, Manufacturer) VALUES(7, 'CD drive', 90, 2);
+INSERT INTO Products(Code, Name, Price, Manufacturer) VALUES(8, 'Printer', 270, 3);
+INSERT INTO Products(Code, Name, Price, Manufacturer) VALUES(9, 'Toner cartridge', 66, 3);
+INSERT INTO Products(Code, Name, Price, Manufacturer) VALUES(10, 'DVD burner', 180, 2);
+
+SELECT * FROM products ;
+SELECT * FROM manufacturers ;
+
+
+CREATE TABLE `Departments` (
+  `Code` int(11) NOT NULL,
+  `Name` varchar(255) NOT NULL,
+  `Budget` decimal(10,0) NOT NULL,
+  PRIMARY KEY (`Code`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SELECT * FROM Departments;
+
+BEGIN;
+INSERT INTO `Departments` VALUES ('14', 'IT', '65000'), ('37', 'Accounting', '15000'), ('59', 'Human Resources', '240000'), ('77', 'Research', '55000');
+COMMIT;

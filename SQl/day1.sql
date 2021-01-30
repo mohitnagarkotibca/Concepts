@@ -57,3 +57,4 @@ SELECT * FROM indian_food ORDER BY cook_time;
 
 #Union
 SELECT * FROM indian_food WHERE region='East' UNION SELECT*FROM indian_food where region='West';
+

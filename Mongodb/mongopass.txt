@@ -1,0 +1,6 @@
+mongoimport --uri="mongodb+srv://m001-student:m001-mongodb-basics@sandbox.mongodb.net/sample_supplies" sales.json
+
+
+
+mongo "mongodb+srv://sandbox.ooxhh.mongodb.net/admin" --username m001-student
+password= : m001-mongodb-basics
