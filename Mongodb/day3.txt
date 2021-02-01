@@ -1,0 +1,78 @@
+mongo "mongodb+srv://sandbox.ooxhh.mongodb.net/admin" --username m001-student
+password= : m001-mongodb-basics
+
+show dbs
+use sample_training
+show collections
+db.inspections.findOne({})
+cls
+
+#practicing or, nor, and
+syntax: {<condition>:[
+                       {<field>:<value>},
+                       {<field>:<value>},
+                       {<field>:<value>}
+                      ]}
+
+db.zips.findOne({})
+#finding states where either population is more than 6000 or the state is 'AL'
+
+db.zips.find({$or:[{'pop':{'$gte':6000} },
+                  {'state':'AL'}
+                  ]
+}).pretty()
+
+#finding states where the population is more than 6000 and state is 'AL'
+
+db.zips.find({
+    'state':'AL',
+    'pop':{'$gte':6000}
+}).pretty()
+
+#city who are neither HELENA NOR CLANTON
+db.zips.find({
+    '$nor':[{'city':'HELENA'},{'city':'CLANTON'}]
+}).pretty().count() 
+# 29492
+
+db.zips.find({
+    '$nor':[{'city':'HELENA','city':'CLANTON'}]
+}).pretty().count() 
+# 29496
+why different ?
+
+-------------------------------------------------------------------
+revising some previous day queries
+use sample_training
+show collections
+db.grades.findOne({})
+db.grades.find({'student_id':0,'class_id':350}).pretty()
+
+db.grades.update({'student_id':0,'class_id':350},
+                 {'$set':{
+                     'favourite_quote':'ALWAYS STICK TO THE PLAN, everything will be possible'
+                 }})
+
+db.grades.update({'student_id':0,'class_id':350},
+                 {'$push':{'language':'Python'}}
+)
+
+db.grades.update({
+    'student_id':0,
+    'class_id':350
+},{
+    '$push':{'language':'mongodb'}
+})
+
+db.grades.update({
+    'student_id':0,
+    'class_id':350
+},{
+    '$unset':{'language':''}
+})
+
+COMPARISION OPERATOR:
+show collections
+db.trips.findOne()
+
+db.trips.find({'tripduration':{'$gt':500}}).pretty()
