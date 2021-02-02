@@ -1,0 +1,107 @@
+mongo "mongodb+srv://sandbox.ooxhh.mongodb.net/admin" --username m001-student
+password= : m001-mongodb-basics
+
+
+show dbs
+use sample_training
+show collections
+db.routes.findOne({})
+
+#how many CR2  and A81 planes comes thorugh the  KZN airport?
+
+db.routes.find({
+    '$and':[
+    {    
+    '$or':[{'src_airport':'KZN'},{'dst_airport':'KZN'}]
+    },
+    {
+    '$or':[{'airplane':'CR2'},{'airplane':'A81'}]
+    }
+]
+}).pretty().count()
+-------------------------------------------------------------------
+Problem:
+
+To complete this exercise connect to your Atlas cluster using the in-browser IDE space at the end of this chapter.
+
+How many businesses in the sample_training.inspections dataset have the inspection result "Out of Business" and belong to the "Home Improvement Contractor - 100" sector?
+
+Enter the exact numeric value of the result that you get into the response field.
+-------------------------------------------------------------------
+use sample_training
+db.inspections.find({'$and':[{'result':'Out of Business'},{'sector':'Home Improvement Contractor - 100'}]}).count()
+
+-------------------------------------------------------------------
+Problem:
+Which is the most succinct query to return all documents from the sample_training.inspections collection where the inspection date is either "Feb 20 2015", or "Feb 21 2015" and the company is not part of the "Cigarette Retail Dealer - 127" sector?
+-------------------------------------------------------------------
+db.inspections.find(
+    {'$and':
+    [{
+        '$or':[{'date':'Feb 20 2015'},{'date':'Feb 21 2015'}]
+     },
+     {
+         'sector':{'$not':/'Cigarette Retail Dealer - 127'/}
+     }
+    ]
+    }
+)
+
+db.inspections.find({
+    '$or':[{'date':'Feb 20 2015'},{'date':'Feb 21 2015'}],
+    'sector':{$ne:'Cigarette Retail Dealer - 127'}
+}).count()
+
+
+db.zips.updateMany({ "city": "HUDSON" }, { "$inc": { "pop": -10 } )
+
+
+-------------------------------------------------------------------
+How many zips in the sample_training.zips dataset are neither over-populated nor under-populated?
+
+In this case, we consider population of more than 1,000,000 to be over- populated and less than 5,000 to be under-populated.
+
+db.zips.findOne()
+db.zips.find({
+    'pop':{'$not':{'$gt':1000000}},
+    'pop':{'$not':{'$lt':5000}}
+}).count()
+-------------------------------------------------------------------
+Problem:
+
+How many companies in the sample_training.companies dataset were either founded in 2004 and either have the social category_code or web category_code, or were founded in the month of October and also either have the social category_code or web category_code?
+
+use sample_training
+show collections
+db.companies.distinct('category_code')
+
+db.companies.find(
+{
+    '$or':
+    [
+        {
+            '$and':
+            [
+                    {'founded_year':2004},
+                {'$or':
+                    [
+                        {'category_code':'social'},
+                        {'category_code':'web'}
+                    ]
+                }
+            ]
+        },
+        {
+            '$and':[
+                {'founded_month':10},
+                {'$or':[
+                    {'category_code':'social'},
+                    {'category_code':'web'}
+                ]
+                }
+            ]
+        }
+    ]
+}).count()
+
+
