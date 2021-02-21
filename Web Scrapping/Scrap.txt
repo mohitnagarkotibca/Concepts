@@ -1,0 +1,48 @@
+import time
+from bs4 import BeautifulSoup 
+import pandas as pd
+from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.chrome.options import Options
+
+Categories=['UFC']
+#---- to stop browser from opening up----
+options = Options()
+options.headless = True
+--------------------------
+# It will open the chrome from Selenium and parse the data using BeautifulSoup
+driver=webdriver.Chrome()
+driver.get(url)
+time.sleep(3)
+#---for scrolling down the page: example. Youtube StudyIQ video list
+for i in range(1):
+    driver.execute_script('window.scrollTo(0,(window.pageYOffset+5000))')
+    time.sleep(3)
+#copying the page source
+data=driver.page_source    
+soup = BeautifulSoup(data,"html.parser")
+
+# how to find the right elements
+
+we find a particular box which consist entire information
+of one entity : example: A video container consisting name,Link,photo,views,likes,etc
+
+I store this information in a Container.
+
+container= soup.find_all('div',{'id':'dismissable'})
+# in order to find a element inside the soup, we use find_all because, we are trying to find all the items
+#----------------------------------------------------
+Remember, A container is a list of items so we can loop over it and Find a particular's item data using find method.
+#syntax: item.find('the main tag',{'attribute':'The part i want'} --> item.find('a',:'video-title')
+
+for item in container:
+    video_titles.append(item.find('a',{'id':'video-title'}).text)
+
+
+#we can open URL using
+import urllib.request
+urllib.request.urlopen('http://www.python.org/')
+
+
+
+
