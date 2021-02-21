@@ -1,0 +1,128 @@
+import pymongo
+client = pymongo.MongoClient()
+db = client['db_1']
+mca= db['MCA']
+
+alpha= {'name':'Mohit', 'uid':'18mca8012','subject':'mongodb'}
+bravo= {'name':'velen', 'uid': '18mca8131','subject':'sql'}
+
+results= mca.insert_many([alpha,bravo])
+results.inserted_ids
+
+for doc in mca.find():
+    print(doc)
+    print('\n')
+
+#some revision----------------------------
+use db_1
+show collections
+db.MCA.find().pretty()
+
+new_1={
+    'name':'xyz',
+    'uid':'18mca80xx'
+}
+db.MCA.insert(new_1)
+
+
+
+db.MCA.update({'name':'xyz'},{'$set':{'subject':'idk'}})
+
+db.MCA.update({'name':'Mohit'},{'$push':
+{
+    'contacts':[731012398,123812389]
+}
+})
+
+db.MCA.update({'name':'Mohit'},{
+    '$push':{
+        'contacts':[19230193]
+    }
+})
+# this added array of multiple items
+
+db.MCA.update({'name':'Mohit'},{
+    '$set':{
+        'contacts':[17238971,123818923]
+    }
+})
+
+#now to add an element in an array
+db.MCA.update({'name':'Mohit'},{
+    '$addToSet':{
+        'contacts':438888888
+    }
+})
+
+1st:
+db.MCA.update({'name':'Mohit'},{
+    '$addToSet':{'contacts':{
+        '$each':[312312,123322,2343434,3434434]
+    }}
+})
+
+2nd:
+db.MCA.update({'name':'Mohit'},{
+    '$addToSet':{
+        'contacts':[1,2,3,5,6]
+    }
+})
+ 
+difference  between first and second is tha, in first new values will be appended to the array and in second, an array of multiple values will be added.
+
+
+db.MCA.update(
+    {'name':'Mohit'},
+    {'$unset':{
+        'education':''
+    }}
+)
+
+db.MCA.update(
+    {'name':'Mohit'},
+    {'$pull':
+    {'contacts':
+        {'$regex': '[^a-zA-Z0-9]'}
+    }
+    }
+)
+
+db.MCA.findOne()
+
+#pop takes 1 for removing from behind and -1 from front
+db.MCA.update({'name':'Mohit'},
+    {'$pop':
+    {
+        'contacts':1
+    }
+    }
+)
+
+------------------------------------------
+CONTINUE:
+#for getting the client database names
+import pymongo
+client= pymongo.MongoClient()
+
+li= client.database_names()
+for d in li:
+    print(d)
+
+d1= client.get_database('db_1')
+
+#will get all collection names
+d1.list_collection_names()
+
+mca= d1.get_collection('MCA')
+
+def pretty():
+    for d in mca.find():
+        print('-'*10)
+        for k,v in d.items():
+            print('{',k,':',v,'}','\n')
+
+mca.update(
+    {'name':'velen'},
+    {'contacts':[1231123,12381238]}
+)
+pretty()
