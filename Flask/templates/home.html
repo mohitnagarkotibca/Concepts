@@ -1,5 +1,6 @@
-{% extends 'layout.html' %}
-{% block content %}
-    <h1> This is Home Page </h1>
-
-{% endblock%}
+{% extends "layout_1.html" %}
+{% block content1 %}
+    {% for post in posts %}
+    Name :{{ post }}
+    {% endfor %}
+{% endblock content1 %}
