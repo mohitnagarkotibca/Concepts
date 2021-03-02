@@ -95,7 +95,7 @@ abc(1,2,3,4,45,5,6,7,'',4)
 def abcd(**kwargs):
     for i,val in kwargs.items():
         print(i,val)
-abc(a=19,b=20,c=20,d=24)
+abcd(a=19,b=20,c=20,d=24)
 --------------------------------------------
 Q8: What are python Generators?
 
@@ -116,6 +116,11 @@ ans: A python class can inherit features from multiple classes
 
 -What is Polymorphism in Python?
 Ans: Polymorphism means the ability to take multiple forms. So, for instance, if the parent class has a method named ABC then the child class also can have a method with the same name ABC having its own parameters and variables. Python allows polymorphism.
+Example:
+len() method acts differently with respect to classes,
+for str it returns number of characters,
+for list it returns number of items,
+for dict it returns number of keys.
 
 -Define encapsulation in Python?
 Ans: Encapsulation means binding the code and the data together. A Python class in an example of encapsulation.
@@ -132,37 +137,80 @@ ans:
 . variables which are made using the self keyword
 . They are owned by the object of the class
 --------------------------------------------
-
-class school:
-    total_count=100
-    def __init__(self):
-        self.class_1_count=40
-        self.class_2_count=60
-    def class_1(self):
-        print('class_1')
-        print(self.class_1_count)
-    def class_2(self):
-        print('class_2')
-        print(school.total_count)
-        print(self.class_2_count)
-
-sc= school()
-
 # Object to class variable works
-sc.total_count
-
 # Object to instance variables works
-sc.class_1_count
-
 # outside : class to class variable works
-school.total_count
-
 # outside: class to instance variable doesnt work
-school.class_1_count
-
 # class to a function works but self needs to be defined. otherwise, variables needs to be printed using class name
-school.class_2()
+#class variables 'Type' can only be accessed using class name
+#protected variables can be accessed using a object
+#private variables cannot be accessed even from a object, they can only be used from 
+# protected variables can be accessed using objects
+#private variables cannot be accessed using inheritence
+# but private variables cann be accessed using method
+--------------------------------------------
+SUMMARY:
 
-# calling the function with object which is accessing a instance and class variables
-#works fine !
-sc.class_2()
+PRIVATE VARIABLES:
+- CAN BE ACCESSED ONLY WITHIN THE CLASS
+- CANNOT BE ACCESSED USING instance Object
+- CAN BE ACCESSED USING INSTANCE BY USING A METHOD.
+- If inherited can only be accessed using methods in parent class
+
+PROTECTED VARIABLES:
+- CAN BE ACCESSED USING OBJECTS
+- CAN BE ACCESSED USING methods
+- CAN BE ACCESSED USING CLASS NAMES
+- CAN BE ACCESSED USING INHERITED CLASS NAME and its object
+-------------------------------------------
+class A:
+    def __init__(self):
+        self.a1=10
+        self._a2=20
+        self.__a3=30
+    def show(self):
+        print(self.__a3)
+class B(A):
+    def __init__(self):
+        super().__init__()
+        self.x=50
+    
+a= A()
+a.a1
+a._a2
+a.__a3
+a.show()
+a.show()
+
+b=B()
+b.a1
+b._a2
+b.__a3
+--------------------------------------------
+
+Q13:
+What are class methods and what are statis methods?
+
+ans:
+ Class Methods are those which passes class as a parameters rather than a instance.
+
+ syntax:
+class A:
+    x=1000
+    @classmethod
+    def c1(cls,amnt):
+        print(amnt)
+        print(cls.x)
+a=A()
+a.c1(100)
+
+
+STATIC METHODS:
+STATIC METHODS ARE THOSE WHICH DO NOT PASS ANY CLASS OR AN INSTANCE AS A parameters
+
+THEY USUALLY ACT AS A UTILITY FUNCTIONS.
+
+
+Q14: STR VS __REPR__
+
+a=[1,2,3,4,5]
