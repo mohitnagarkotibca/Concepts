@@ -1,0 +1,38 @@
+linux: since 1960s and still get used because of the extension Leading to 
+flavours like redhat, ubuntu, suse, etc
+Characteristics of linux:
+1. open source
+2. freeware
+3. multi user
+4. multi tasking
+5. user friendly
+6. more secure ( needs permission to do anything in the host system)
+
+example: 
+command to create 50 directories =====> touch dir{1..50}
+## touch creates emoty files
+
+extentions of linux:
+ubuntu, redhat, centos,kali, fedora,slackware
+
+Components of OS:
+		
+	1. Shell:
+		 * user  can communicate with hardware
+		 * outer layer of os
+		 * shell layer of OS
+		 * shell reads the command provided by user
+	
+	2. kernel:
+		* kernel executes the command provided by shell
+		* memory allocation and processor allocation is also done by kernel
+ 
+		 OS consist of shell and kernel.
+		 user interacts with shell, Shell verifies the command and
+		 sends it to kernel for execution.
+
+	execution work flow:
+
+	USER ==> shell ==> kernel ==> hardware
+
+

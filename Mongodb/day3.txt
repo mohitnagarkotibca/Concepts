@@ -17,7 +17,28 @@ syntax: {<condition>:[
 db.zips.findOne({})
 #finding states where either population is more than 6000 or the state is 'AL'
 
-db.zips.find({$or:[{'pop':{'$gte':6000} },
+db.zips.find({
+    $or:[
+        {
+            'pop':{
+                '$gte':6000
+                }
+        },
+        {
+            'state':'AL'
+        }
+        ]
+})
+
+
+
+
+db.zips.find({$or:
+                    [
+                        {'pop':{
+                            '$gte':6000
+                                  } 
+                        },
                   {'state':'AL'}
                   ]
 }).pretty()
@@ -27,7 +48,7 @@ db.zips.find({$or:[{'pop':{'$gte':6000} },
 db.zips.find({
     'state':'AL',
     'pop':{'$gte':6000}
-}).pretty()
+}).count()
 
 #city who are neither HELENA NOR CLANTON
 db.zips.find({
@@ -38,6 +59,7 @@ db.zips.find({
 db.zips.find({
     '$nor':[{'city':'HELENA','city':'CLANTON'}]
 }).pretty().count() 
+
 # 29496
 why different ?
 

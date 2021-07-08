@@ -1,6 +1,7 @@
 
 mongo "mongodb+srv://sandbox.ooxhh.mongodb.net/admin" --username m001-student
 password= : m001-mongodb-basics
+
 show dbs
 
 use sample_airbnb
@@ -28,6 +29,31 @@ db.grades.updateOne(
     }
 )
 
+
+db.grades.updateOne(
+    {
+    'student_id':0,
+    'class_id':339,
+    },
+    {
+        '$push':{'Bad_Qualities':''}
+    }
+)
+
+db.grades.findOne({
+    'student_id':0,
+    'class_id':339
+}
+)
+
+
+
+
+
+
+
+
+
 db.grades.updateOne(
     {
         'class_id':350,
@@ -38,20 +64,29 @@ db.grades.updateOne(
     }
 )
 
-did some type above which led to creation of some new fields in database
+did some type above which led to creation of some new 
+fields in database
 
 now removing the mistakes
 
-db.grades.findOne({'class_id':350,'student_id':0}).pretty()
-
-#mistakes corrected
-db.grades.update({'class_id':350,'student_id':0},{
-    '$unset':{'Good Qualities':'','Bad Qualities':'','Good_Qualities':'','Bad_Qualities':''    
-    }
-})
-
 db.grades.findOne({'class_id':350,'student_id':0})
 
+#mistakes corrected
+db.grades.update(
+    {
+    'class_id':350,
+    'student_id':0
+    },
+    {
+    '$unset':{'Good Qualities':'',
+    'Bad Qualities':''
+    }
+    }
+)
+
+db.grades.find({'class_id':350,'student_id':0}).pretty()
+
+############ $ set adds the thing you provide and $ push adds everything as a list
 db.grades.update({
     'class_id':350,
     'student_id':0
@@ -67,18 +102,37 @@ db.grades.update({
     },
     {'$set':{'study':'Masters'}}
     )
+db.grades.update({
+    'class_id':350,
+    'student_id':0
+    },
+    {'$push':{'study2':'Masters'}}
+    )
+db.grades.find({'class_id':350,'student_id':0}).pretty()
+
+# who adds as a list and who adds the same type?
+*************************************************************
 
 db.pets.insert({
- "_id": ObjectId("5ec414e5e722bb1f65a25451"),
+ "id": 1,
  "pet": "wolf",
  "domestic?": false,
  "diet": "carnivorous",
  "climate": ["polar", "equatorial", "continental", "mountain"]
 })
 
-db.pets.find({}).pretty()
+db.pets.find({'id':1}).pretty()
+
+db.pets.findOne()
+
+db.pets.updateMany({'id':1},
+{
+    '$push':{'climate':'continental','look':'adorable'}}
+)
+
 db.pets.updateMany({'pet':'cat'},
-{'$push':{'climate':'continental','look':'adorable'}}
+{
+    '$push':{'climate':'continental','look':'adorable'}}
 )
 
 db.pets.updateMany({'pet':'wolf'},{
@@ -145,6 +199,7 @@ Using the sample_training.routes collection find out which of the following stat
 -------------------------------------------------------------------
 show collections
 db.routes.findOne()
+
 
 db.routes.find({'stops':{'$ne':0}}).count()
 db.routes.find({'stops':{'$gt':0}}).count()
